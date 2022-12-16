@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
+[RequireComponent(typeof(ParticleSystemForceField))]
 public class ParticleFlow : MonoBehaviour
 {
     ParticleSystem m_System;
