@@ -22,10 +22,10 @@ public class ParticleForceFieldsSO : ScriptableObject
     ParticleSystem.Particle[] m_Particles;
     private ParticleSystem m_Ps;
 
-    public void InitializeForceFields(ParticleSystem ps)
+    public void InitializeForceFields(ParticleSystem ps, ParticleSystemForceField ps_force)
     {
         m_Ps = ps;
-        m_ForceField = m_Ps.gameObject.AddComponent<ParticleSystemForceField>();
+        m_ForceField = ps_force;
         var forces = ps.externalForces;
         forces.enabled = true;        
     }
@@ -52,15 +52,15 @@ public class ParticleForceFieldsSO : ScriptableObject
 
         if (m_Particles == null || m_Particles.Length < m_Ps.main.maxParticles)
             m_Particles = new ParticleSystem.Particle[m_Ps.main.maxParticles];
-        
+
         // GetParticles is allocation free because we reuse the m_Particles buffer between updates
         int numParticlesAlive = m_Ps.GetParticles(m_Particles);
-     
+
         // Change only the particles that are alive
         for (int i = 0; i < numParticlesAlive; i++)
         {
             //Keep in mind that the particles do not necessarily reach the designated target and only move towards it.
-            m_Particles[i].position = Vector3.MoveTowards(m_Particles[i].position,m_TargetPos, m_Velocity);
+            m_Particles[i].position = Vector3.MoveTowards(m_Particles[i].position, m_TargetPos, m_Velocity);
         }
 
         // Apply the particle changes to the Particle System
