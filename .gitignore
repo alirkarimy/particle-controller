@@ -64,3 +64,6 @@ crashlytics-build.properties
 *.tar
 
 /JigsawPuzzle/Assets/StreamingAssets/aa/Android
+/particle-controller-source/*.vsconfig
+/particle-controller-source/UserSettings
+/particle-controller-source/Packages
